@@ -37,7 +37,7 @@ class Tree:
         return self.root is None
 
     def __contains__(self, x):
-        """Does tree contains value?"""
+        """Does tree contain value?"""
         return self._search(self.root, x) is not None
 
     def _search(self, l: Node, x) -> Node:
@@ -56,11 +56,18 @@ class Tree:
         self.root = self._insert(self.root, x)
 
     def _insert(self, l: Node, x, parent: Node = None) -> Node:
+        # l is root, x is item to insert, parent is 
+        # the parent of the item after we will insert it
         if l is None:
             return Node(x, parent)
 
+        # if root.item is larger than x, than call recursive insert on it as 
+        # the left child of root and set root as a parent
         if less(x, l.item, self.key):
             l.left = self._insert(l.left, x, l)
+
+        # if root.item is smaller than item to insert - 
+        # call recursive insert the item as the right child of the root
         elif less(l.item, x, self.key):
             l.right = self._insert(l.right, x, l)
         return l
